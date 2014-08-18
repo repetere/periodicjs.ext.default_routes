@@ -1,7 +1,7 @@
 {
   "name": "periodicjs.ext.default_routes",
-  "description": "default for periodicjs.",
-  "version": "0.1.0",
+  "description": "default routes for periodicjs.",
+  "version": "1.0.1",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.x"
@@ -11,10 +11,20 @@
     "email": "yaw.etse@gmail.com",
     "url": "http://about.me/yawjosephetse"
   },
-  "repository": {},
-  "scripts": {},
-  "dependencies": {},
-  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typesettin/periodicjs.ext.default_routes.git"
+  },
+  "scripts": {
+    "postinstall": "node install.js",
+    "postuninstall": "node uninstall.js"
+  },
+  "dependencies": {
+    "async": "0.9.0",
+    "fs-extra": "0.11.0",
+    "periodicjs.core.controllerhelper": "~1.1.1",
+    "periodicjs.core.extensions": "~1.3.2"
+  },
   "keywords": [
     "periodicjs"
   ]
