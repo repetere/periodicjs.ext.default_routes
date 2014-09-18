@@ -1,7 +1,7 @@
 {
   "name": "periodicjs.ext.default_routes",
   "description": "default routes for periodicjs.",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "main": "index.js",
   "engines": {
     "node": ">=0.10.x"
@@ -27,5 +27,31 @@
   },
   "keywords": [
     "periodicjs"
-  ]
+  ],
+  "gitHead": "a82a417299895cc7a9b710a99969a886bf6e4492",
+  "bugs": {
+    "url": "https://github.com/typesettin/periodicjs.ext.default_routes/issues"
+  },
+  "homepage": "https://github.com/typesettin/periodicjs.ext.default_routes",
+  "_id": "periodicjs.ext.default_routes@1.5.2",
+  "_shasum": "b6caf0e167273bb7e6dc46184ea3c5710c1852f0",
+  "_from": "periodicjs.ext.default_routes@1.5.2",
+  "_npmVersion": "2.0.0-beta.0",
+  "_npmUser": {
+    "name": "yawetse",
+    "email": "yaw.etse@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "yawetse",
+      "email": "yaw.etse@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "b6caf0e167273bb7e6dc46184ea3c5710c1852f0",
+    "tarball": "http://registry.npmjs.org/periodicjs.ext.default_routes/-/periodicjs.ext.default_routes-1.5.2.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/periodicjs.ext.default_routes/-/periodicjs.ext.default_routes-1.5.2.tgz",
+  "readme": "ERROR: No README data found!"
 }

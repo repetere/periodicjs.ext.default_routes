@@ -35,7 +35,7 @@ module.exports = function (periodic) {
 	 * item-articles routes
 	 */
 	itemRouter.get('/search', itemController.loadItems, itemController.index);
-	itemRouter.get('/:id', itemController.loadItem, itemController.show);
+	itemRouter.get('/:id', itemController.loadFullItem, itemController.show);
 
 	/**
 	 * collections
