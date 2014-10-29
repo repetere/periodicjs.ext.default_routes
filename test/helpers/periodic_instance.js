@@ -1,21 +1,11 @@
-var npm = require('npm'),
+var npm     = require('npm'),
     path    = require('path'),
-    async = require('async')
-    nexpect = require('nexpect');
+    fs      = require('fs-extra');
+    periodic = "periodicjs@latest";
 
-//nexpect.spawn("ls -la /tmp/undefined", { stream: 'stderr' })
-         //.expect("No such file or directory")
-         //.run(function (err) {
-           //if (!err) {
-             //console.log("checked that file doesn't exists");
-           //}
-         //});
+create_previous_dirSync(previous_dir())
 
-var previous_dir = path.resolve(process.cwd(),'../'),
-    periodic      = "periodicjs@latest";
-
-
-npm.load({prefix:previous_dir}, function (err) {
+npm.load({prefix:previous_dir()}, function (err) {
     if (err) {
      throw err 
     }
@@ -30,3 +20,17 @@ npm.load({prefix:previous_dir}, function (err) {
     console.log(message);
   });
 });
+
+
+function previous_dir() {
+ return path.resolve(process.cwd(),'../periodic_Stub');
+}
+function create_previous_dirSync(path_to) {
+ return fs.mkdirsSync(path_to); 
+}
+function remove_previous_dirSync() {
+  return fs.removeSync(previous_dir());
+}
+module.exports.previous_dir = previous_dir;
+module.exports.create_previous_dir = create_previous_dir;
+module.exports.remove_previous_dirSync = remove_previous_dirSync;
