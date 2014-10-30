@@ -32,5 +32,5 @@ function remove_previous_dirSync() {
   return fs.removeSync(previous_dir());
 }
 module.exports.previous_dir = previous_dir;
-module.exports.create_previous_dir = create_previous_dir;
+module.exports.create_previous_dir = create_previous_dirSync;
 module.exports.remove_previous_dirSync = remove_previous_dirSync;
