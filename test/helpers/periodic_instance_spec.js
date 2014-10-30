@@ -47,14 +47,14 @@ describe('The periodic Stub', function(){
       expect(packageJson).to.have.content.that.match(/periodicjs/);
       done()
     });
-    it('should start the server on the periodic folder', function(done){
+    xit('should start the server on the periodic folder', function(done){
       var server = child.spawn('npm', ['run',' nd'],{stdio:'inherit',cwd:stubCWD})
       server.on('error',function(err) {
        console.log('Encountered error:', err);
        process.exit();
       })
       server.on('close',function() {
-        console.log('closed server: ' + server.pid );
+        console.log('closed server: '+  server.pid );
       })
       expect(server).to.be.ok
       done()
