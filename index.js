@@ -15,6 +15,7 @@ module.exports = function (periodic) {
 	// express,app,logger,config/settings,db
 	var homeController = require(path.resolve(process.cwd(), './app/controller/home'))(periodic),
 		itemController = require(path.resolve(process.cwd(), './app/controller/item'))(periodic),
+		assetController = require(path.resolve(process.cwd(), './app/controller/asset'))(periodic),
 		// tagController = require(path.resolve(process.cwd(),'./app/controller/tag'))(periodic),
 		// categoryController = require(path.resolve(process.cwd(),'./app/controller/category'))(periodic),
 		// contenttypeController = require(path.resolve(process.cwd(),'./app/controller/contenttype'))(periodic),
@@ -23,6 +24,7 @@ module.exports = function (periodic) {
 		collectionController = require(path.resolve(process.cwd(), './app/controller/collection'))(periodic),
 		compilationController = require(path.resolve(process.cwd(), './app/controller/compilation'))(periodic),
 		themeController = require(path.resolve(process.cwd(), './app/controller/theme'))(periodic),
+		assetRouter = periodic.express.Router(),
 		itemRouter = periodic.express.Router(),
 		browseRouter = periodic.express.Router(),
 		tagRouter = periodic.express.Router(),
@@ -37,30 +39,38 @@ module.exports = function (periodic) {
 	/**
 	 * root routes
 	 */
-	// appRouter.get('/items',itemController.loadItems,itemController.index);
-	appRouter.get('/articles', itemController.loadItems, itemController.index);
-	appRouter.get('/collections', collectionController.loadCollections, collectionController.index);
-	appRouter.get('/compilations', compilationController.loadCompilations, compilationController.index);
+	appRouter.get('/assets', assetController.loadAssetWithCount, assetController.loadAssetWithDefaultLimit, assetController.loadAssets, assetController.index);
+	appRouter.get('/items', itemController.loadItemsWithCount, itemController.loadItemsWithDefaultLimit, itemController.loadItems, itemController.index);
+	// appRouter.get('/articles', itemController.loadItems, itemController.index);
+	appRouter.get('/collections', collectionController.loadCollectionsWithCount, collectionController.loadCollectionsWithDefaultLimit, collectionController.loadCollections, collectionController.index);
+	appRouter.get('/compilations', compilationController.loadCompilationsWithCount, compilationController.loadCompilationsWithDefaultLimit, compilationController.loadCompilations, compilationController.index);
+	appRouter.get('/authors', userController.loadUsersWithCount, userController.loadUsersWithDefaultLimit, userController.loadUsers, userController.index);
 	appRouter.get('/404|/notfound', homeController.error404);
 	appRouter.get('/search', searchController.browse, searchController.results);
 
 	/**
+	 * assets routes
+	 */
+	assetRouter.get('/search', assetController.loadAssetWithCount, assetController.loadAssetWithDefaultLimit, assetController.loadAssets, assetController.index);
+	assetRouter.get('/:id', assetController.loadAsset, assetController.show);
+
+	/**
 	 * item-articles routes
 	 */
-	itemRouter.get('/search', itemController.loadItems, itemController.index);
+	itemRouter.get('/search', itemController.loadItemsWithCount, itemController.loadItemsWithDefaultLimit, itemController.loadItems, itemController.index);
 	itemRouter.get('/:id', itemController.loadFullItem, itemController.show);
 
 	/**
 	 * collections
 	 */
-	collectionRouter.get('/search', collectionController.loadCollections, collectionController.index);
+	collectionRouter.get('/search', collectionController.loadCollectionsWithCount, collectionController.loadCollectionsWithDefaultLimit, collectionController.loadCollections, collectionController.index);
 	collectionRouter.get('/:id/page/:pagenumber', collectionController.loadCollection, collectionController.show);
 	collectionRouter.get('/:id', collectionController.loadCollection, collectionController.show);
 
 	/**
-	 * collections
+	 * compilations
 	 */
-	compilationRouter.get('/search', compilationController.loadCompilations, compilationController.index);
+	compilationRouter.get('/search', compilationController.loadCompilationsWithCount, compilationController.loadCompilationsWithDefaultLimit, compilationController.loadCompilations, compilationController.index);
 	compilationRouter.get('/:id/page/:pagenumber', compilationController.loadCompilation, compilationController.show);
 	compilationRouter.get('/:id', compilationController.loadCompilation, compilationController.show);
 
@@ -166,7 +176,8 @@ module.exports = function (periodic) {
 		});
 	});
 
-	periodic.app.use('/item|/article|/document', itemRouter);
+	periodic.app.use('/asset', assetRouter);
+	periodic.app.use('/item', itemRouter);
 	periodic.app.use('/tag', tagRouter);
 	periodic.app.use('/category', categoryRouter);
 	periodic.app.use('/collection', collectionRouter);
