@@ -11,7 +11,9 @@ create_previous_dirSync(previous_dir())
 
 
 //npm.config skip_post_install =true
-if (!fs.existsSync(periodic_cwd)){
+if (fs.existsSync(periodic_cwd)){
+  console.log("Periodic Installed!");
+}else{
   npm.load({
     prefix: previous_dir(),
     skip_post_install: true
@@ -19,7 +21,7 @@ if (!fs.existsSync(periodic_cwd)){
     if (err) {
       throw err
     }
-    npm.commands.install(["periodicjs@2.0.0"], function (err, data) {
+    npm.commands.install([periodic_version], function (err, data) {
       npm.config.set("skip_post_install", true)
       if (err) {
         throw err

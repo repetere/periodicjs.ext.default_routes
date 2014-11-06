@@ -1,5 +1,4 @@
-var timers = require("timers"),
-    child = require("child"),
+var child = require("child"),
     ___backgroundExec;
  
 process.on('message',function(msg){
@@ -25,9 +24,7 @@ process.on('message',function(msg){
         ___backgroundExec = child.exec(function(){
  
             try{
-                var date = new Date();
-                console.log("periodic_worker.js: datetime tick: " + date.toUTCString());
-                this._dev_server(msg.content);
+                this._dev_server(msg.command);
             }
             catch(err){
                 count++;
