@@ -89,7 +89,7 @@ module.exports = function (periodic) {
 	/**
 	 * authors
 	 */
-	appRouter.get('/author/:id', userController.loadUser, userController.show);
+	appRouter.get('/author/:id', userController.loadUser, userController.loadUserForBrowseControllerContent, searchController.browsefilter, searchController.browse, userController.showProfile);
 	/**
 	 * browse/search
 	 */
