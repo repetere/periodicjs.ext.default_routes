@@ -1,5 +1,5 @@
 {
 	"name": "periodicjs.ext.default_routes",
-	"periodicCompatibility":"2.1.2",
+	"periodicCompatibility":"3.0.0",
 	"periodicDependencies":[]
 }
