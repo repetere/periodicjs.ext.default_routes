@@ -13,17 +13,17 @@ var path = require('path');
  */
 module.exports = function (periodic) {
 	// express,app,logger,config/settings,db
-	var homeController = require(path.resolve(process.cwd(), './app/controller/home'))(periodic),
-		itemController = require(path.resolve(process.cwd(), './app/controller/item'))(periodic),
-		assetController = require(path.resolve(process.cwd(), './app/controller/asset'))(periodic),
+	var homeController = periodic.app.controller.native.home,
+		itemController = periodic.app.controller.native.item,
+		assetController = periodic.app.controller.native.asset,
 		// tagController = require(path.resolve(process.cwd(),'./app/controller/tag'))(periodic),
 		// categoryController = require(path.resolve(process.cwd(),'./app/controller/category'))(periodic),
 		// contenttypeController = require(path.resolve(process.cwd(),'./app/controller/contenttype'))(periodic),
-		userController = require(path.resolve(process.cwd(), './app/controller/user'))(periodic),
-		searchController = require(path.resolve(process.cwd(), './app/controller/search'))(periodic),
-		collectionController = require(path.resolve(process.cwd(), './app/controller/collection'))(periodic),
-		compilationController = require(path.resolve(process.cwd(), './app/controller/compilation'))(periodic),
-		themeController = require(path.resolve(process.cwd(), './app/controller/theme'))(periodic),
+		userController = periodic.app.controller.native.user,
+		searchController = periodic.app.controller.native.search,
+		collectionController = periodic.app.controller.native.collection,
+		compilationController = periodic.app.controller.native.compilation,
+		themeController = periodic.app.controller.native.theme,
 		assetRouter = periodic.express.Router(),
 		itemRouter = periodic.express.Router(),
 		browseRouter = periodic.express.Router(),
@@ -186,4 +186,5 @@ module.exports = function (periodic) {
 	periodic.app.use('/contenttype', contenttypeRouter);
 	periodic.app.use('/browse', browseRouter);
 	periodic.app.use(appRouter);
+	return periodic;
 };
