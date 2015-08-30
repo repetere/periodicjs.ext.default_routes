@@ -39,9 +39,10 @@ module.exports = function (periodic) {
 	/**
 	 * root routes
 	 */
-	appRouter.get('/assets', assetController.loadAssetWithCount, assetController.loadAssetWithDefaultLimit, assetController.loadAssets, assetController.index);
+	// console.log('assetController',assetController);
+	appRouter.get('/assets', assetController.loadAssetsWithCount, assetController.loadAssetsWithDefaultLimit, assetController.loadAssets, assetController.index);
 	appRouter.get('/items', itemController.loadItemsWithCount, itemController.loadItemsWithDefaultLimit, itemController.loadItems, itemController.index);
-	// appRouter.get('/articles', itemController.loadItems, itemController.index);
+	appRouter.get('/articles', itemController.loadItems, itemController.index);
 	appRouter.get('/collections', collectionController.loadCollectionsWithCount, collectionController.loadCollectionsWithDefaultLimit, collectionController.loadCollections, collectionController.index);
 	appRouter.get('/compilations', compilationController.loadCompilationsWithCount, compilationController.loadCompilationsWithDefaultLimit, compilationController.loadCompilations, compilationController.index);
 	appRouter.get('/authors', userController.loadUsersWithCount, userController.loadUsersWithDefaultLimit, userController.loadUsers, userController.index);
@@ -51,7 +52,7 @@ module.exports = function (periodic) {
 	/**
 	 * assets routes
 	 */
-	assetRouter.get('/search', assetController.loadAssetWithCount, assetController.loadAssetWithDefaultLimit, assetController.loadAssets, assetController.index);
+	assetRouter.get('/search', assetController.loadAssetsWithCount, assetController.loadAssetsWithDefaultLimit, assetController.loadAssets, assetController.index);
 	assetRouter.get('/:id', assetController.loadAsset, assetController.show);
 
 	/**
@@ -89,7 +90,7 @@ module.exports = function (periodic) {
 	/**
 	 * authors
 	 */
-	appRouter.get('/author/:id', userController.loadUser, userController.loadUserForBrowseControllerContent, searchController.browsefilter, searchController.browse, userController.showProfile);
+	appRouter.get('/author/:id', userController.loadUser, userController.loadFullUserData, searchController.browsefilter, searchController.browse, userController.show);
 	/**
 	 * browse/search
 	 */
@@ -99,8 +100,8 @@ module.exports = function (periodic) {
 	/**
 	 * final root routes
 	 */
-	appRouter.get('/install/getlog', global.CoreCache.disableCache, homeController.get_installoutputlog);
-	// appRouter.get('/',itemController.loadItems,homeController.index);
+	// appRouter.get('/install/getlog', global.CoreCache.disableCache, homeController.get_installoutputlog);
+	appRouter.get('/',itemController.loadItems,homeController.index);
 	appRouter.get('/', function (req, res) {
 		themeController.customLayout({
 			req: req,
