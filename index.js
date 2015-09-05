@@ -101,7 +101,7 @@ module.exports = function (periodic) {
 	 * final root routes
 	 */
 	// appRouter.get('/install/getlog', global.CoreCache.disableCache, homeController.get_installoutputlog);
-	appRouter.get('/',itemController.loadItems,homeController.index);
+	// appRouter.get('/',itemController.loadItems,homeController.index);
 	appRouter.get('/', function (req, res) {
 		themeController.customLayout({
 			req: req,
